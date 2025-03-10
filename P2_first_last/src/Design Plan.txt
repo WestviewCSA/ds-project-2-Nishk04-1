@@ -1,0 +1,18 @@
+
+Design Plan - P2
+Due: 3/12/25 11:59pm
+
+After reading the specs, start populating a list of things you think
+you might have to do to finish this project.
+
+Map Input Format:
+rows columns map#
+
+
+3 Different Routines:
+--------------------
+1) Find any valid path using a queue
+2) Find any valid path using a stack
+3) Find an optimal (shortest distance) path
+
+
