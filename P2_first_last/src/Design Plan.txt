@@ -9,10 +9,10 @@ Map Input Format:
 rows columns map#
 
 
-3 Different Routines:
---------------------
-1) Find any valid path using a queue
-2) Find any valid path using a stack
-3) Find an optimal (shortest distance) path
+Timeline:
+
+1) Read map in and store in queue and stack - Wednesday 3/11/25
+
+2) 
 
 
