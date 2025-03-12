@@ -11,8 +11,16 @@ rows columns map#
 
 Timeline:
 
-1) Read map in and store in queue and stack - Wednesday 3/11/25
+1) Read map in and store in queue and stack - Wednesday 3/11/25	
 
-2) 
+2) Put the Tiles in the stack and queue - Friday or End of Week 
+
+3) Pick one approach and then finish it - Tuesday
+
+4) Pick the second approach and then finish it - Thursday
+
+5) Now do the optimal approach method (look into DFS or other algos) - End of Weekend
+
+6)The rest of the stuff - output, checking runtimes, etc. - Tuesday 
 
 

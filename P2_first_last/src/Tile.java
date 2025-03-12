@@ -3,12 +3,16 @@ public class Tile {
 
 		private int row, col;
 		private char type;
+		private boolean visited;
+		private String output;
 		
-		public Tile(int row, int col, char type) {
+		public Tile(int row, int col, char type, String output) {
 			super();
 			this.row = row;
 			this.col = col;
 			this.type = type;
+			this.visited = false;
+			this.output = output;
 		}
 
 		public int getRow() {
@@ -33,6 +37,18 @@ public class Tile {
 
 		public void setType(char type) {
 			this.type = type;
+		}
+		
+		public boolean getVisited() {
+			return visited;
+		}
+
+		public void setVisited(boolean visited) {
+			this.visited = visited;
+		}
+		
+		public String toString() {
+			return output;
 		}
 
 }
