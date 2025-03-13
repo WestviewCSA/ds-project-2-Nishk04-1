@@ -7,7 +7,7 @@ public class p2 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	    String filename = "H:\\git\\ds-project-2-Nishk04-1\\P2_first_last\\src\\TestMaze01";
-		readMap("TestMaze01");
+		readMap(filename);
 	}
 	
 	public static void readMap(String filename) {
@@ -27,10 +27,13 @@ public class p2 {
 				if(row.length()>0) {
 					for(int col = 0; col < numCols && col < row.length(); col++) {
 						char element = row.charAt(col);
-						//Tile obj = new Tile(rowIndex, col, element);
+						Tile obj = new Tile(rowIndex, col, element);
+						
 					}
+					rowIndex++;
 				}
 			}
+			scanner.close();
 			
 		} catch (FileNotFoundException e){
 			System.out.println(e);

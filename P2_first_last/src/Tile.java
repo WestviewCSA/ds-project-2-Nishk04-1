@@ -1,18 +1,25 @@
 
 public class Tile {
 
-		private int row, col;
+		private int row, col, mapLevel;
 		private char type;
 		private boolean visited;
-		private String output;
 		
-		public Tile(int row, int col, char type, String output) {
+		public Tile(int row, int col, char type) {
 			super();
 			this.row = row;
 			this.col = col;
 			this.type = type;
 			this.visited = false;
-			this.output = output;
+		}
+		
+		public Tile(int row, int col, char type, int mapLevel) {
+			super();
+			this.row = row;
+			this.col = col;
+			this.type = type;
+			this.mapLevel = mapLevel;
+			this.visited = false;
 		}
 
 		public int getRow() {
@@ -47,8 +54,12 @@ public class Tile {
 			this.visited = visited;
 		}
 		
+		public int getmapLevel() {
+			return mapLevel;
+		}
+		
 		public String toString() {
-			
+			return "Char: " + type;
 		}
 
 }

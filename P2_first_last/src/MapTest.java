@@ -6,7 +6,7 @@ class MapTest {
 
 	@Test
 	void test() {
-		assertTrue("Not yet implemented");
+		//assertTrue("Not yet implemented");
 	}
 
 }
