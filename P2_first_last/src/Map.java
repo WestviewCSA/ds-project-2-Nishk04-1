@@ -1,5 +1,9 @@
 
 public class Map {
 	
-	private Tile[][] map;
+	private Tile[][] map; //rows, cols
+	
+	public Map(int rows, int cols, ) {
+		
+	}
 }

@@ -27,7 +27,7 @@ public class p2 {
 				if(row.length()>0) {
 					for(int col = 0; col < numCols && col < row.length(); col++) {
 						char element = row.charAt(col);
-						Tile obj = new Tile(rowIndex, col, element);
+						//Tile obj = new Tile(rowIndex, col, element);
 					}
 				}
 			}
