@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Stack;
+import java.util.Queue;
 
 public class p2 {
 
@@ -8,7 +10,7 @@ public class p2 {
 		// TODO Auto-generated method stub
 	    String filename = "H:\\git\\ds-project-2-Nishk04-1\\P2_first_last\\src\\TestMaze01";
 		readMap(filename);
-	}
+		}
 	
 	public static void readMap(String filename) {
 		try {

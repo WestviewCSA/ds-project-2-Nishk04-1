@@ -1,18 +1,19 @@
 
 public class Map {
 	
-	private Tile[][][] map; //rows, cols, map/room #
+	private Tile[][][] map; //rows, cols, # number of rooms/levels
 	int rows, cols, roomNum;
 	public Map(int rows, int cols, int rooms) {
 		map = new Tile[rows][cols][rooms];
 		this.rows = rows;
 		this.cols = cols;
 		this.roomNum = rooms;
+		
 	}
 	
-	public void setTile(int row, int col, int room, Tile obj) {
-		//
-		map[row][col][room] = obj;
+	public void setTile(Map map, int row, int col, int room, Tile obj) {
+		//map[row][col][room] = obj;
+		
 	}
 	
 	public String returnMaze() {
