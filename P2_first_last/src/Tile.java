@@ -5,15 +5,16 @@ public class Tile {
 		private char type;
 		private boolean visited;
 		
-		public Tile(int row, int col, char type) {
+		public Tile(int row, int col, char type) { // be able to set a tile 
 			super();
 			this.row = row;
 			this.col = col;
 			this.type = type;
 			this.visited = false;
+			this.mapLevel = 0;
 		}
 		
-		public Tile(int row, int col, char type, int mapLevel) {
+		public Tile(int row, int col, char type, int mapLevel) { // you can set the mapLevel if it's on another level
 			super();
 			this.row = row;
 			this.col = col;

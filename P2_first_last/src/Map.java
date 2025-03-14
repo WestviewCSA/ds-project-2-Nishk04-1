@@ -11,8 +11,8 @@ public class Map {
 		
 	}
 	
-	public void setTile(Map map, int row, int col, int room, Tile obj) {
-		//map[row][col][room] = obj;
+	public void setTile(int row, int col, int room, Tile obj) {
+		map[row][col][room] = obj;
 		
 	}
 	

@@ -64,6 +64,7 @@ public class p2 {
 					Tile obj = new Tile(rowIndex, colIndex, mapElement);
 				}
 			}
+			scanner.close();
 			
 		} catch (FileNotFoundException e){
 			System.out.println(e);
