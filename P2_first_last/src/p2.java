@@ -5,11 +5,12 @@ import java.util.Stack;
 import java.util.Queue;
 
 public class p2 {
-
+	static Map maze;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	    String filename = "H:\\git\\ds-project-2-Nishk04-1\\P2_first_last\\src\\TestMaze01";
 		readMap(filename);
+		maze.returnMaze();
 		}
 	
 	public static void readMap(String filename) {
@@ -21,7 +22,10 @@ public class p2 {
 			int numCols = scanner.nextInt();
 			int numRooms = scanner.nextInt();
 			
+			//Create the map 
+			maze = new Map(numRows, numCols, numRooms);
 			int rowIndex = 0;
+			
 			//process the map!
 			while(scanner.hasNextLine()) {
 				String row = scanner.nextLine();
@@ -30,6 +34,9 @@ public class p2 {
 					for(int col = 0; col < numCols && col < row.length(); col++) {
 						char element = row.charAt(col);
 						Tile obj = new Tile(rowIndex, col, element);
+						
+						maze.setTile(obj);
+						
 						
 					}
 					rowIndex++;
