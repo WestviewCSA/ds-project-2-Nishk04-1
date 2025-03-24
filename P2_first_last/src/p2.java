@@ -13,6 +13,16 @@ public class p2 {
 		System.out.println(maze.returnMaze());
 		}
 	
+	public static void stackSolver() {
+		if(maze == null) {
+			System.out.println("No map found bro");
+			System.exit(-1);
+		}
+		
+		Stack stack = new Stack();
+		
+	}
+	
 	public static void readMap(String filename) {
 		try {
 			File file = new File(filename);
