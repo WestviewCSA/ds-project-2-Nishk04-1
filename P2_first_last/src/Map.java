@@ -12,9 +12,18 @@ public class Map {
 	}
 	
 	public void setTile(Tile obj) {
-
-		map[rows][cols][roomNum] = obj;
-		
+		int row = obj.getRow();
+		int col = obj.getCol();
+		int room = obj.getLevel();
+	    if (row >= 0 && row < rows && col >= 0 && col < cols && room >= 0 && room < roomNum) {
+	        map[row][col][room] = obj; 
+	    } else {
+	        System.out.println("Error: Index out of bounds! row=" + row + ", col=" + col + ", room=" + room);
+	    }
+	}
+	
+	public Tile getTile(int row, int col, int room) {
+		return map[row][col][room];
 	}
 	
 	public String returnMaze() {
@@ -23,7 +32,9 @@ public class Map {
 			for(int row = 0; row < rows; row++) {
 				for(int col = 0; col < cols; col++) {
 					maze += map[row][col][room];
+					
 				}
+				maze+= "\n";
 			}
 		}
 		return maze;

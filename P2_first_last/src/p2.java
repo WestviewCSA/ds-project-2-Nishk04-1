@@ -10,7 +10,7 @@ public class p2 {
 		// TODO Auto-generated method stub
 	    String filename = "H:\\git\\ds-project-2-Nishk04-1\\P2_first_last\\src\\TestMaze01";
 		readMap(filename);
-		maze.returnMaze();
+		System.out.println(maze.returnMaze());
 		}
 	
 	public static void readMap(String filename) {
@@ -33,11 +33,9 @@ public class p2 {
 				if(row.length()>0) {
 					for(int col = 0; col < numCols && col < row.length(); col++) {
 						char element = row.charAt(col);
-						Tile obj = new Tile(rowIndex, col, element);
+						Tile obj = new Tile(rowIndex, col, element, 0);
 						
 						maze.setTile(obj);
-						
-						
 					}
 					rowIndex++;
 				}
@@ -68,7 +66,7 @@ public class p2 {
 					int colIndex = row.charAt(2);
 					int mazeLevel = row.charAt(3);
 
-					Tile obj = new Tile(rowIndex, colIndex, mapElement);
+					Tile obj = new Tile(rowIndex, colIndex, mapElement, 0);
 				}
 			}
 			scanner.close();

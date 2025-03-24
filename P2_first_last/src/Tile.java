@@ -5,12 +5,12 @@ public class Tile {
 		private char type;
 		private boolean visited;
 		
-		public Tile(int row, int col, char type) { // be able to set a tile 
+		public Tile(int row, int col, char type, int level) { // be able to set a tile 
 			this.row = row;
 			this.col = col;
 			this.type = type;
 			this.visited = false;
-			//this.mapLevel = 1;
+			this.mapLevel = level;
 		}
 		
 //		public Tile(int row, int col, char type, int mapLevel) { // you can set the mapLevel if it's on another level
@@ -19,7 +19,7 @@ public class Tile {
 //			this.type = type;
 //			this.mapLevel = mapLevel;
 //			this.visited = false;
-//		}
+//		} 
 
 		public int getRow() {
 			return row;
@@ -53,12 +53,12 @@ public class Tile {
 			this.visited = visited;
 		}
 		
-//		public int getLevel() {
-//			return mapLevel;
-//		}
+		public int getLevel() {
+			return mapLevel;
+		}
 		
 		public String toString() {
-			return "Char: " + type;
+			return "" + type;
 		}
 
 }
