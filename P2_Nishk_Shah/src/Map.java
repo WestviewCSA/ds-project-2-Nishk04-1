@@ -25,6 +25,19 @@ public class Map {
 	public Tile getTile(int row, int col, int room) {
 		return map[row][col][room];
 	}
+
+	public Tile getStartTile() {
+		for(int room = 0; room < this.roomNum; room++) {
+			for(int row = 0; row < rows; row++) {
+				for(int col = 0; col < cols; col++) {
+					if(map[row][col][room] != null && map[row][col][room].getType() == 'W') {
+						return map[row][col][room];
+					}
+				}
+			}
+		}
+		return null;
+	}
 	
 	public String returnMaze() {
 		String maze = "";

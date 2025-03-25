@@ -20,9 +20,22 @@ public class p2 {
 			System.out.println("No map found bro");
 			System.exit(-1);
 		}
-		
+		Tile start = maze.getStartTile();
 		Stack stack = new Stack();
+
 		
+		
+		
+	}
+
+	private void stackSolverHelper(Tile currTile){
+		//We want to push the next open space to the stack
+		//The directions are in order of North, South, East, and West
+		int[][] directions = {{0,1},{0,-1},{1,0},{-1,0}};
+		if(currTile.getType() == 'W'){
+
+		}
+
 	}
 	
 	public static void readMap(String filename) {
