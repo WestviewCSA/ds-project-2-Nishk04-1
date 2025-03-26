@@ -21,22 +21,32 @@ public class p2 {
 			System.exit(-1);
 		}
 		Tile start = maze.getStartTile();
-		Stack stack = new Stack();
+		Stack<Tile> stack = new Stack<Tile>();
+		stack.add(start);
+	
+		// add the next stuff to the stack until we reach 'w'
+		while(!stack.isEmpty() ) {
+			// Gets the tile that we need to process first
+			Tile currTile = stack.pop();
 
-		
-		
-		
+			if (currTile.getType() == '$') {
+				System.out.println("Found the Diamond Wolverine Buck!");
+				// TODO: add the code to print the path it took - maybe implement this in the map class
+			}
+			
+			if ((currTile.getType() == '.' || currTile.getType() == 'W') && !currTile.getVisited()) {
+				currTile.setVisited(true);
+				currTile.setType('+');
+				for(Tile neighbors : maze.getNeighbors(maze, currTile)) {
+					if(neighbors.getType() == '.' || neighbors.getType() == 'W') {
+						stack.push(neighbors);
+					}
+				}
+			}
+
+		}	
 	}
 
-	private void stackSolverHelper(Tile currTile){
-		//We want to push the next open space to the stack
-		//The directions are in order of North, South, East, and West
-		int[][] directions = {{0,1},{0,-1},{1,0},{-1,0}};
-		if(currTile.getType() == 'W'){
-
-		}
-
-	}
 	
 	public static void readMap(String filename) {
 		try {

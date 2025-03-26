@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Tile {
 
@@ -55,6 +56,11 @@ public class Tile {
 		
 		public int getLevel() {
 			return mapLevel;
+		}
+
+		public int[] getLocation() {
+			int[] location = {this.row, this.col};
+			return location;
 		}
 		
 		public String toString() {

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Map {
 	 private Tile[][][] map;
@@ -26,7 +27,28 @@ public class Map {
 		return map[row][col][room];
 	}
 
+	public ArrayList<Tile>  getNeighbors(Map maze, Tile tile){
+		ArrayList<Tile> neighbors = new ArrayList<Tile>();
+		//North, South, East, West - format: {row, col}
+		int[][] directions = {{1,0},{-1, 0},{0,1},{0,-1}};
+		for(int i = 0; i < directions.length; i++){
+			int curRow = tile.getRow() + directions[i][0];
+			int curCol = tile.getCol() + directions[i][1];
+			int curRoom = tile.getLevel();
+			
+			//the cur index has to be smaller than the length
+			if(curRow >= 0 && curRow < rows && curCol >= 0 && curCol < cols && curRoom >= 0 && curRoom < roomNum) {
+				neighbors.add(maze.getTile(curRow, curCol, curRoom)); 
+			} else{
+				continue; // skip if out of bounds
+			}
+
+		}
+		return neighbors;
+	}
+
 	public Tile getStartTile() {
+		// Gets the first W it finds
 		for(int room = 0; room < this.roomNum; room++) {
 			for(int row = 0; row < rows; row++) {
 				for(int col = 0; col < cols; col++) {
@@ -38,7 +60,23 @@ public class Map {
 		}
 		return null;
 	}
-	
+
+	// Will find the NEXT W after the starting W
+	public Tile getNextLevelStart(int startRow, int prevLevel) {
+		int nextLevel = prevLevel + 1;
+		if (nextLevel >= roomNum) return null; // No more rooms
+		
+		// Start searching from the row after the initial W
+		for (int row = startRow + 1; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				if (map[row][col][nextLevel] != null && map[row][col][nextLevel].getType() == 'W') {
+					return map[row][col][nextLevel]; // Return the first W found but after the starting W
+				}
+			}
+		}
+		return null;
+	}
+
 	public String returnMaze() {
 		String maze = "";
 		for(int room = 0; room < this.roomNum; room++) {
