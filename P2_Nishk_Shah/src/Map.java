@@ -35,10 +35,15 @@ public class Map {
 			int curRow = tile.getRow() + directions[i][0];
 			int curCol = tile.getCol() + directions[i][1];
 			int curRoom = tile.getLevel();
-			
+
 			//the cur index has to be smaller than the length
 			if(curRow >= 0 && curRow < rows && curCol >= 0 && curCol < cols && curRoom >= 0 && curRoom < roomNum) {
-				neighbors.add(maze.getTile(curRow, curCol, curRoom)); 
+				Tile neighbor = maze.getTile(curRow, curCol, curRoom);
+            	// only add the neighbor if it's not visited and not marked with '+'
+				if (neighbor.getType() != '+' && !neighbor.getVisited()) {
+					neighbors.add(neighbor);
+				}
+
 			} else{
 				continue; // skip if out of bounds
 			}

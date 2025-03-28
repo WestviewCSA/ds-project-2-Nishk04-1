@@ -8,10 +8,12 @@ public class p2 {
 	static Map maze;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	    String filename = "P2_Nishk_Shah\\src\\TestMaze01";
+	    String filename = "P2_Nishk_Shah\\src\\TEST\\Test05";
 		readMap(filename);
 		String output = maze.returnMaze();
 		System.out.println(output);
+		stackSolver();
+
 		
 		}
 	
@@ -20,10 +22,15 @@ public class p2 {
 			System.out.println("No map found bro");
 			System.exit(-1);
 		}
+		long startTime = System.nanoTime();
+
 		Tile start = maze.getStartTile();
 		Stack<Tile> stack = new Stack<Tile>();
 		stack.add(start);
-	
+		start.setVisited(true);
+		
+		boolean found = false;
+
 		// add the next stuff to the stack until we reach 'w'
 		while(!stack.isEmpty() ) {
 			// Gets the tile that we need to process first
@@ -31,20 +38,33 @@ public class p2 {
 
 			if (currTile.getType() == '$') {
 				System.out.println("Found the Diamond Wolverine Buck!");
-				// TODO: add the code to print the path it took - maybe implement this in the map class
-			}
-			
-			if ((currTile.getType() == '.' || currTile.getType() == 'W') && !currTile.getVisited()) {
-				currTile.setVisited(true);
-				currTile.setType('+');
-				for(Tile neighbors : maze.getNeighbors(maze, currTile)) {
-					if(neighbors.getType() == '.' || neighbors.getType() == 'W') {
-						stack.push(neighbors);
-					}
-				}
+				found = true;
+				break;
 			}
 
+			if(currTile.getType() != 'W'){
+				currTile.setType('+');
+			}	
+			for (Tile neighbor : maze.getNeighbors(maze, currTile)) {
+				if ((neighbor.getType() == '.' || neighbor.getType() == 'W'|| neighbor.getType() == '$') && !neighbor.getVisited()) {
+					neighbor.setVisited(true); // Mark as visited before pushing
+					stack.push(neighbor);
+				}
+			}
+	
+
 		}	
+		if (!found) {
+            System.out.println("The Wolverine Store is closed.");
+        } else {
+            String completedMaze = maze.returnMaze();
+            System.out.println(completedMaze);
+        }
+
+        // Measure the runtime
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000000;  // Convert to milliseconds
+        System.out.println("Runtime: " + duration + " ms");
 	}
 
 	
