@@ -30,7 +30,7 @@ public class Map {
 	public ArrayList<Tile>  getNeighbors(Map maze, Tile tile){
 		ArrayList<Tile> neighbors = new ArrayList<Tile>();
 		//North, South, East, West - format: {row, col}
-		int[][] directions = {{1,0},{-1, 0},{0,1},{0,-1}};
+		int[][] directions = {{-1,0},{1, 0},{0,1},{0,-1}};
 		for(int i = 0; i < directions.length; i++){
 			int curRow = tile.getRow() + directions[i][0];
 			int curCol = tile.getCol() + directions[i][1];
@@ -40,7 +40,7 @@ public class Map {
 			if(curRow >= 0 && curRow < rows && curCol >= 0 && curCol < cols && curRoom >= 0 && curRoom < roomNum) {
 				Tile neighbor = maze.getTile(curRow, curCol, curRoom);
             	// only add the neighbor if it's not visited and not marked with '+'
-				if (neighbor.getType() != '+' && !neighbor.getVisited()) {
+				if (neighbor.getType() != '+' && !neighbor.getVisited() && neighbor.getType() != '@') {
 					neighbors.add(neighbor);
 				}
 

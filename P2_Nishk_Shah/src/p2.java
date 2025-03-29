@@ -6,20 +6,62 @@ import java.util.Queue;
 
 public class p2 {
 	static Map maze;
+	static MazeReader mazeReader;
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-	    String filename = "P2_Nishk_Shah\\src\\TEST\\Test05";
-		readMap(filename);
-		String output = maze.returnMaze();
-		System.out.println(output);
-		stackSolver();
+		// TODO - create the exception stuff
+		boolean Stack = false;
+        boolean Queue = false;
+        boolean Opt = false;
+        boolean Time = false;
+        boolean Incoordinate = false;
+        boolean Outcoordinate = false;
+        boolean Help = false;
+        String fileName = "";
 
-		
+		for (String arg : args) {
+			switch (arg) {
+				case "--Stack":
+					Stack = true;
+					break;
+				case "--Queue":
+					Queue = true;
+					break;
+				case "--Opt":
+					Opt = true;
+					break;
+				case "--Time":
+					Time = true;
+					break;
+				case "--Incoordinate":
+					Incoordinate = true;
+					break;
+				case "--Outcoordinate":
+					Outcoordinate = true;
+					break;
+				case "--Help":
+					Help = true;
+					break;
+			}
 		}
+
+		 // Define the filename
+		 String filename = "P2_Nishk_Shah\\TEST\\Test02"; // Adjust path if needed
+		 boolean isCoordinateBased = false; // Decide format based on input flag
+ 
+		 mazeReader = new MazeReader();
+		 mazeReader.readMaze(filename, isCoordinateBased);
+		 maze = mazeReader.getMaze();
+ 
+		 System.out.println(maze.returnMaze());
+ 
+		 StackSolver solver = new StackSolver(maze);
+         solver.solve();
+		
+	}
 	
 	public static void stackSolver() {
 		if(maze == null) {
-			System.out.println("No map found bro");
+			System.out.println("No map found");
 			System.exit(-1);
 		}
 		long startTime = System.nanoTime();
@@ -63,77 +105,7 @@ public class p2 {
 
         // Measure the runtime
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime) / 1000000;  // Convert to milliseconds
-        System.out.println("Runtime: " + duration + " ms");
+        long duration = (endTime - startTime);  // Convert to milliseconds
+        System.out.println("Runtime: " + duration + " nanoseconds");
 	}
-
-	
-	public static void readMap(String filename) {
-		try {
-			File file = new File(filename);
-			if (!file.exists()) {
-				System.out.println("File not found: " + filename);
-				return;
-			}
-			Scanner scanner = new Scanner(file);
-			
-			int numRows = scanner.nextInt();
-			int numCols = scanner.nextInt();
-			int numRooms = scanner.nextInt();
-			
-			//Create the map 
-			maze = new Map(numRows, numCols, numRooms);
-
-			int rowIndex = 0;
-			
-			//process the map!
-			while(scanner.hasNextLine()) {
-				String row = scanner.nextLine();
-				
-				if(row.length()>0) {
-					for(int col = 0; col < numCols && col < row.length(); col++) {
-						char element = row.charAt(col);
-						Tile obj = new Tile(rowIndex, col, element, 0);
-						
-						maze.setTile(obj);
-					}
-					rowIndex++;
-				}
-			}
-			scanner.close();
-			
-		} catch (FileNotFoundException e){
-			System.out.println(e);
-		}
-	}
-	
-	public static void readCoordinateMap(String filename) {
-		try {
-			File file = new File(filename);
-			Scanner scanner = new Scanner(file);
-			
-			int numRows = scanner.nextInt();
-			int numCols = scanner.nextInt();
-			int numRooms = scanner.nextInt();
-			
-			//process the map!
-			while(scanner.hasNextLine()) {
-				String row = scanner.nextLine();
-				
-				if(row.length()>0) {
-					char mapElement = row.charAt(0);
-					int rowIndex = row.charAt(1);
-					int colIndex = row.charAt(2);
-					int mazeLevel = row.charAt(3);
-
-					Tile obj = new Tile(rowIndex, colIndex, mapElement, 0);
-				}
-			}
-			scanner.close();
-			
-		} catch (FileNotFoundException e){
-			System.out.println(e);
-		}
-	}
-	
 }
