@@ -45,7 +45,7 @@ public class p2 {
 		}
 
 		 // Define the filename
-		 String filename = "P2_Nishk_Shah\\TEST\\Test02"; // Adjust path if needed
+		 String filename = "P2_Nishk_Shah\\TEST\\Test06"; // Adjust path if needed
 		 boolean isCoordinateBased = false; // Decide format based on input flag
  
 		 mazeReader = new MazeReader();
