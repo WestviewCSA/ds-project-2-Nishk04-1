@@ -1,17 +1,15 @@
-import java.util.Stack;
 
-public class StackSolver {
+public class QueueSolver {
     private Map maze;
     private boolean found;
     private int[] endCoord = new int[2]; //Index of the WV Buck
-    private boolean isCoordinateBased; // This can be used to determine if the input is coordinate based or not
 
-    public StackSolver(Map maze) {
+    // Uses  Queues
+    public QueueSolver(Map maze) {
         this.maze = maze;
         this.found = false;
         this.endCoord[0] = 0;
         this.endCoord[1] = 0;
-        this.isCoordinateBased = true;
     }
 
     public void solve() {
@@ -22,13 +20,13 @@ public class StackSolver {
 
         long startTime = System.nanoTime();
         Tile start = maze.getStartTile();
-        Stack<Tile> stack = new Stack<>();
-        stack.add(start);
+        Queue<Tile> queue = new Queue<Tile>();
+        queue.enqueue(start);
         start.setVisited(true);
         start.setParent(null); // Start has no parent
 
-        while (!stack.isEmpty()) {
-            Tile currTile = stack.pop();
+        while (!queue.empty()) {
+            Tile currTile = queue.dequeue();
 
             if (currTile.getType() == '$') {
                 System.out.println("Found the Diamond Wolverine Buck!");
@@ -45,7 +43,7 @@ public class StackSolver {
                     neighbor.setVisited(true);
                     neighbor.setParent(currTile.getLocation());
                     neighbor.setAction(getAction(currTile, neighbor)); 
-                    stack.push(neighbor);
+                    queue.enqueue(neighbor);
                 }
             }
         }
@@ -53,7 +51,7 @@ public class StackSolver {
         if (!found) {
             System.out.println("The Wolverine Store is closed.");
         } else {
-            System.out.println(maze.returnMaze(isCoordinateBased));
+            System.out.println(maze.returnMaze());
         }
 
         long endTime = System.nanoTime();

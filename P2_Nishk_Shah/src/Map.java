@@ -82,15 +82,30 @@ public class Map {
 		return null;
 	}
 
-	public String returnMaze() {
+	public String returnMaze(boolean isCoordinateBased) {
 		String maze = "";
-		for(int room = 0; room < this.roomNum; room++) {
-			for(int row = 0; row < rows; row++) {
-				for(int col = 0; col < cols; col++) {
-					maze += map[row][col][room];
+		if(isCoordinateBased){ // Coordinate Based
+			for(int room = 0; room < this.roomNum; room++) {
+				for(int row = 0; row < rows; row++) {
+					for(int col = 0; col < cols; col++) {
+						if(map[row][col][room].getType() == '+'){
+							Tile curTile = map[row][col][room]; 
+							maze += "+" + " " + curTile.getRow() + " " + curTile.getCol() + " " + curTile.getLevel();
+							maze+= "\n";
+						}
+					}
 					
 				}
-				maze+= "\n";
+			}
+		} else { // Text Based
+
+			for(int room = 0; room < this.roomNum; room++) {
+				for(int row = 0; row < rows; row++) {
+					for(int col = 0; col < cols; col++) {
+						maze += map[row][col][room];
+					}
+					maze+= "\n";
+				}
 			}
 		}
 		return maze;
