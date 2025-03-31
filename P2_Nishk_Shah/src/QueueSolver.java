@@ -20,7 +20,6 @@ public class QueueSolver {
             return;
         }
 
-        long startTime = System.nanoTime();
         Tile start = maze.getStartTile();
         Queue<Tile> queue = new Queue<Tile>();
         queue.enqueue(start);
@@ -34,7 +33,7 @@ public class QueueSolver {
                 System.out.println("Found the Diamond Wolverine Buck!");
                 endCoord[0] = currTile.getRow();
                 endCoord[1] = currTile.getCol();
-                System.out.println("End coordinates: " + endCoord[0] + ", " + endCoord[1]);
+                //System.out.println("End coordinates: " + endCoord[0] + ", " + endCoord[1]);
                 found = true;
                 tracePath(currTile); // Backtrack
                 break;
@@ -55,9 +54,6 @@ public class QueueSolver {
         } else {
             System.out.println(maze.returnMaze(isCoordinateBased));
         }
-
-        long endTime = System.nanoTime();
-        System.out.println("Runtime: " + (endTime - startTime) + " nanoseconds");
     }
 
     // It finds the action taken to move from parent to child

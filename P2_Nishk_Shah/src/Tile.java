@@ -7,6 +7,7 @@ public class Tile {
 		private boolean visited;
 		private int[] action; // This can be used to store the action taken on this tile to get to the NEXT tile
 		private int[] parent;
+		private double cost;
 
 		public Tile(int row, int col, char type, int level, int[] action, int[] parent) { // be able to set a tile 
 			this.row = row;
@@ -17,6 +18,7 @@ public class Tile {
 			this.parent = parent;
 			this.action = action; // This can be used to store the action taken on this tile to get to the NEXT tile
 			// Example: action could be {1, 0} for moving south, {-1, 0} for moving north, etc. This can be used to trace back the path taken.
+			this.cost = Double.MAX_VALUE;
 		}
 		
 		public Tile(int row, int col, char type, int level) { // be able to set a tile 
@@ -52,6 +54,14 @@ public class Tile {
 		public void setParent(int[] parent) { // set the parent tile of this tile
 			this.parent = parent; // This can be used to trace back the path taken to get to this tile
 		}
+
+		public double getCost() {
+			return cost;
+		}
+	
+		public void setCost(double cost) {
+			this.cost = cost;
+		}	
 
 		public int getRow() {
 			return row;

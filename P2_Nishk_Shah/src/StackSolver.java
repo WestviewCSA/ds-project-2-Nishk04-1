@@ -35,7 +35,7 @@ public class StackSolver {
                 System.out.println("Found the Diamond Wolverine Buck!");
                 endCoord[0] = currTile.getRow();
                 endCoord[1] = currTile.getCol();
-                System.out.println("End coordinates: " + endCoord[0] + ", " + endCoord[1]);
+                //System.out.println("End coordinates: " + endCoord[0] + ", " + endCoord[1]);
                 found = true;
                 tracePath(currTile); // Backtrack
                 break;

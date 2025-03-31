@@ -10,7 +10,7 @@ public class p2 {
         boolean Incoordinate = false;
         boolean Outcoordinate = false;
         boolean Help = false;
-        String filename = "P2_Nishk_Shah\\TEST\\Test02";
+        String filename = "../TEST/Test07";
 
 		for (String arg : args) {
 			switch (arg) {
@@ -64,18 +64,21 @@ public class p2 {
 	        mazeReader.readMaze(filename, false);
 	    }
 		maze = mazeReader.getMaze();
+		System.out.print(maze.returnMaze(Incoordinate));
+		
 		//SOLVE THE MAZE:
 		// long startTime = System.nanoTime();
         // long endTime = System.nanoTime();
         // System.out.println("Total Runtime: " + (endTime - startTime) + " nanoseconds");
-		//StackSolver stackSolver = new StackSolver(maze, Outcoordinate);
+		StackSolver stackSolver = new StackSolver(maze, Outcoordinate);
 		QueueSolver queueSolver = new QueueSolver(maze, Outcoordinate);
+		OptimalSolver optimalSolver = new OptimalSolver(maze, Outcoordinate);
 		if (Time) { 
 	        if (Stack) { 
 	            long startStack = System.currentTimeMillis();
-				//stackSolver.solve();	            
+				stackSolver.solve();	            
 				long endStack = System.currentTimeMillis();
-	            double sDur = (startStack - endStack) / 1000.0;
+	            double sDur = (endStack - startStack) / 1000.0;
 	            System.out.println("Total Runtime: " + sDur + " seconds");
 	        } else if (Queue) {
 	            long startQueue = System.currentTimeMillis();
@@ -84,9 +87,8 @@ public class p2 {
 	            double qDur = (endQueue - startQueue) / 1000.0;
 	            System.out.println("Total Runtime: " + qDur + " seconds");
 	        } else if (Opt) {  
-
 	            long optstart = System.currentTimeMillis();
-	            
+	            optimalSolver.solve();
 	            long optend = System.currentTimeMillis();
 	            double optDur = (optend - optstart) / 1000.0;
 	            System.out.println("Total Runtime: " + optDur + " seconds");
