@@ -10,7 +10,7 @@ public class p2 {
         boolean Incoordinate = false;
         boolean Outcoordinate = false;
         boolean Help = false;
-        String filename = "../TEST/Test07";
+        String filename = "../TEST/Test10";
 
 		for (String arg : args) {
 			switch (arg) {
