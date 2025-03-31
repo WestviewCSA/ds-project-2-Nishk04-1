@@ -3,13 +3,15 @@ public class QueueSolver {
     private Map maze;
     private boolean found;
     private int[] endCoord = new int[2]; //Index of the WV Buck
+    private boolean isCoordinateBased;
 
-    // Uses  Queues
-    public QueueSolver(Map maze) {
+    // Uses BFS + Queues
+    public QueueSolver(Map maze, boolean isCoordinateBased) {
         this.maze = maze;
         this.found = false;
         this.endCoord[0] = 0;
         this.endCoord[1] = 0;
+        this.isCoordinateBased = isCoordinateBased;
     }
 
     public void solve() {
@@ -51,7 +53,7 @@ public class QueueSolver {
         if (!found) {
             System.out.println("The Wolverine Store is closed.");
         } else {
-            System.out.println(maze.returnMaze());
+            System.out.println(maze.returnMaze(isCoordinateBased));
         }
 
         long endTime = System.nanoTime();

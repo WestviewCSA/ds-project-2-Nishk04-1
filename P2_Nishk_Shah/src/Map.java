@@ -67,12 +67,12 @@ public class Map {
 	}
 
 	// Will find the NEXT W after the starting W
-	public Tile getNextLevelStart(int startRow, int prevLevel) {
+	public Tile getNextLevelStart(int prevLevel) {
 		int nextLevel = prevLevel + 1;
 		if (nextLevel >= roomNum) return null; // No more rooms
 		
 		// Start searching from the row after the initial W
-		for (int row = startRow + 1; row < rows; row++) {
+		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
 				if (map[row][col][nextLevel] != null && map[row][col][nextLevel].getType() == 'W') {
 					return map[row][col][nextLevel]; // Return the first W found but after the starting W
@@ -81,7 +81,24 @@ public class Map {
 		}
 		return null;
 	}
-
+	
+	public Tile getPrevLevelStart(int currentLevel) {
+		int prevLevel = currentLevel - 1;
+		if (prevLevel < 0) {
+			return null; // No previous room exists
+		}
+	
+		// Search for 'W' in the previous room
+		for (int row = 0; row < rows; row++) {
+			for (int col = 0; col < cols; col++) {
+				if (map[row][col][prevLevel] != null && map[row][col][prevLevel].getType() == 'W') {
+					return map[row][col][prevLevel]; // Return the first 'W' found in the previous room
+				}
+			}
+		}
+		return null;
+	}
+	
 	public String returnMaze(boolean isCoordinateBased) {
 		String maze = "";
 		if(isCoordinateBased){ // Coordinate Based
@@ -98,7 +115,6 @@ public class Map {
 				}
 			}
 		} else { // Text Based
-
 			for(int room = 0; room < this.roomNum; room++) {
 				for(int row = 0; row < rows; row++) {
 					for(int col = 0; col < cols; col++) {

@@ -1,9 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.Stack;
-import java.util.Queue;
-
 public class p2 {
 	static Map maze;
 	static MazeReader mazeReader;
@@ -16,7 +10,7 @@ public class p2 {
         boolean Incoordinate = false;
         boolean Outcoordinate = false;
         boolean Help = false;
-        String fileName = "";
+        String filename = "P2_Nishk_Shah\\TEST\\Test02";
 
 		for (String arg : args) {
 			switch (arg) {
@@ -52,24 +46,70 @@ public class p2 {
 								"--Outcoordinate (boolean) If this switch is set, the output file is in the coordinate-based system. If the switch is not set, the output file is in the text-map format.");
 			System.exit(0);
 		}
-		if(Time){
 
+		//ERROR CHECKING:
+		if ((Stack && Queue) || (Queue && Opt) || (Stack && Opt)) {
+            System.out.println("Error: Please only use ONE of --Stack, --Queue, or --Opt at a time.");
+            System.exit(-1);
+        }
+		if (!Stack && !Queue && !Opt) {
+			System.out.println("Error: Please specify one of --Stack, --Queue, or --Opt.");
+			System.exit(-1);
 		}
-		 // Define the filename
-		 String filename = "P2_Nishk_Shah\\TEST\\Test05"; // Adjust path if needed
-		 boolean isCoordinateBased = false; // Decide format based on input flag
- 
-		 mazeReader = new MazeReader();
-		 mazeReader.readMaze(filename, isCoordinateBased);
-		 maze = mazeReader.getMaze();
- 
-		 System.out.println(maze.returnMaze(false));
- 
-		StackSolver solver = new StackSolver(maze);
-        solver.solve();
-		
-		// QueueSolver queueSolver = new QueueSolver(maze);
+		//READ MAP:
+		mazeReader = new MazeReader();
+		if (Incoordinate) { //Reads the coordinate map
+	        mazeReader.readMaze(filename, true);
+	    } else { //Reads the text-based map
+	        mazeReader.readMaze(filename, false);
+	    }
+		maze = mazeReader.getMaze();
+		//SOLVE THE MAZE:
+		// long startTime = System.nanoTime();
+        // long endTime = System.nanoTime();
+        // System.out.println("Total Runtime: " + (endTime - startTime) + " nanoseconds");
+		//StackSolver stackSolver = new StackSolver(maze, Outcoordinate);
+		QueueSolver queueSolver = new QueueSolver(maze, Outcoordinate);
+		if (Time) { 
+	        if (Stack) { 
+	            long startStack = System.currentTimeMillis();
+				//stackSolver.solve();	            
+				long endStack = System.currentTimeMillis();
+	            double sDur = (startStack - endStack) / 1000.0;
+	            System.out.println("Total Runtime: " + sDur + " seconds");
+	        } else if (Queue) {
+	            long startQueue = System.currentTimeMillis();
+	            queueSolver.solve();
+	            long endQueue = System.currentTimeMillis();
+	            double qDur = (endQueue - startQueue) / 1000.0;
+	            System.out.println("Total Runtime: " + qDur + " seconds");
+	        } else if (Opt) {  
+
+	            long optstart = System.currentTimeMillis();
+	            
+	            long optend = System.currentTimeMillis();
+	            double optDur = (optend - optstart) / 1000.0;
+	            System.out.println("Total Runtime: " + optDur + " seconds");
+	        }
+	    } else {
+	        if (Stack) { 
+	        	 //stackSolver.solve();
+	        } else if (Queue) { 
+	        	 queueSolver.solve();
+	        } else if (Opt) {  
+	            //
+	        }
+	    }
+
+		// mazeReader = new MazeReader();
+		// mazeReader.readMaze(filename, false);
+		// maze = mazeReader.getMaze();
+		// System.out.print(maze.returnMaze(false));
+
+		// QueueSolver queueSolver = new QueueSolver(maze, false);
 		// queueSolver.solve();
-		
+
+		// StackSolver stackSolver = new StackSolver(maze, false);
+		// stackSolver.solve();
 	}
 }

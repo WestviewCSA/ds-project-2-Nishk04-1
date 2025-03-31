@@ -29,25 +29,33 @@ public class MazeReader {
                 return;
             }
             Scanner scanner = new Scanner(file);
-
+    
             int numRows = scanner.nextInt();
             int numCols = scanner.nextInt();
             int numRooms = scanner.nextInt();
             scanner.nextLine(); // Move to the next line
-
+    
             // Create the map
             maze = new Map(numRows, numCols, numRooms);
-
+    
             int rowIndex = 0;
+            int curRoomIndex = 0;
+            
             while (scanner.hasNextLine()) {
                 String row = scanner.nextLine();
                 if (!row.isEmpty()) {
                     for (int col = 0; col < numCols && col < row.length(); col++) {
                         char element = row.charAt(col);
-                        Tile obj = new Tile(rowIndex, col, element, 0);
+                        Tile obj = new Tile(rowIndex, col, element, curRoomIndex);
                         maze.setTile(obj);
                     }
                     rowIndex++;
+                }
+                
+                // If we've filled a full room we want to increment the room index
+                if (rowIndex >= numRows) {
+                    rowIndex = 0;  // Reset for next room
+                    curRoomIndex++; // Move to next room
                 }
             }
             scanner.close();

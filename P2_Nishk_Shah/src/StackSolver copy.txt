@@ -1,3 +1,5 @@
+This is the stack where I am trying to make the 2 room map work
+---------------------------------------------------------------------------
 import java.util.Stack;
 
 public class StackSolver {
@@ -43,8 +45,18 @@ public class StackSolver {
     
             // Explore neighbors
             for (Tile neighbor : maze.getNeighbors(maze, currTile)) {
-                // Explore '.' (open path), 'W' (start), and '$' (destination)
-                if ((neighbor.getType() == '.' || neighbor.getType() == 'W' || neighbor.getType() == '$') && !neighbor.getVisited()) {
+                // If we encounter a doorway '|', we transition to the next room
+                if (neighbor.getType() == '|') {
+                    // Handle forward movement through the '|' to the next room
+                    Tile nextLevelStart = maze.getNextLevelStart(currTile.getLevel());
+                    if (nextLevelStart != null && !nextLevelStart.getVisited()) {
+                        nextLevelStart.setVisited(true);
+                        nextLevelStart.setParent(currTile.getLocation()); // Set parent for backtracking
+                        stack.push(nextLevelStart);
+                    }
+                }
+                // Explore '.', 'W', and '$' tiles if they haven't been visited
+                else if ((neighbor.getType() == '.' || neighbor.getType() == 'W' || neighbor.getType() == '$') && !neighbor.getVisited()) {
                     neighbor.setVisited(true);
                     neighbor.setParent(currTile.getLocation()); // Set parent for backtracking
                     neighbor.setAction(getAction(currTile, neighbor)); 
@@ -62,6 +74,7 @@ public class StackSolver {
         }
     }
     
+    
 
     // It finds the action taken to move from parent to child
     private int[] getAction(Tile parent, Tile child) {
@@ -74,19 +87,16 @@ public class StackSolver {
     
         // Backtrack to the starting point
         while (current.getParent() != null) {
-            // Get the parent tile
             int[] parentCoords = current.getParent();
             Tile parentTile = maze.getTile(parentCoords[0], parentCoords[1], current.getLevel());
     
-            // Mark the path with '+'
-            if (current.getType() != '$' && current.getType() != 'W' && current.getType() != '|') {
+            // If the current tile is not a special tile ('|', 'W', '$'), mark it as part of the path
+            if (current.getType() != '|' && current.getType() != 'W' && current.getType() != '$') {
                 current.setType('+');
             }
     
             // Move to the parent tile to continue backtracking
             current = parentTile;
         }
-    }
-    
-
+    }    
 }
